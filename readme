@@ -3,12 +3,12 @@ Assignment 4 readme File
 ------------------------------------------------------------------------
 Student 1: What is your name?
 
-
+Judah Guggenheim
 
 ------------------------------------------------------------------------
 Student 2: What is your name?
 
-
+N/A
 
 ------------------------------------------------------------------------
 Student 1: What authorized sources of information did you use to
@@ -40,7 +40,7 @@ nature of the interaction, may additionally require the interaction
 being reported to the Committee on Discipline. Write "None" if you used
 no unauthorized sources of information.
 
-
+"None"
 
 ------------------------------------------------------------------------
 Student 2: What unauthorized sources of information did you use to
@@ -117,7 +117,7 @@ the error manifests itself or is "noticed" by the client.
 
       Executable         Function with the underlying error
 ===============================================================
-         ./bdtBad1        
+         ./bdtBad1       insert()  /* doesn't yield an initialization error when trying to add a path before the object exists */ 
 ---------------------------------------------------------------
          ./bdtBad2        
 ---------------------------------------------------------------
