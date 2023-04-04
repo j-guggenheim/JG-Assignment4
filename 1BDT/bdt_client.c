@@ -165,6 +165,8 @@ int main(void) {
   assert(BDT_destroy() == INITIALIZATION_ERROR);
   assert(BDT_contains("a") == FALSE);
   assert((temp = BDT_toString()) == NULL);
+  fprintf(stderr, "Checkpoint Promotion:\n%s\n", temp);
+
 
   return 0;
 }
