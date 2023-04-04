@@ -140,6 +140,7 @@ int main(void) {
   free(temp);
   assert(BDT_rm("a/y") == SUCCESS);
   assert((temp = BDT_toString()) != NULL);
+  print("Hello World");
   fprintf(stderr, "Checkpoint Promotion:\n%s\n", temp);
   assert(!strcmp(temp,"a\na/x\n"));
   free(temp);
