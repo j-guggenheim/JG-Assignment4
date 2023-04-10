@@ -71,7 +71,7 @@ static boolean CheckerDT_treeCheck(Node_T oNNode) {
          if(iStatus != SUCCESS) {
             fprintf(stderr, "getNumChildren claims more children than getChild returns\n");
             return FALSE;
-
+         }
         /* Check that the children are in increasing lexographic order*/
         if(prevChild!=NULL){
             fprintf(stderr, "testing phase");
@@ -82,7 +82,7 @@ static boolean CheckerDT_treeCheck(Node_T oNNode) {
             }
         }
             prevChild = oNChild;
-         }
+         
 
          /* if recurring down one subtree results in a failed check
             farther down, passes the failure back up immediately */
@@ -96,7 +96,6 @@ static boolean CheckerDT_treeCheck(Node_T oNNode) {
 /* see checkerDT.h for specification */
 boolean CheckerDT_isValid(boolean bIsInitialized, Node_T oNRoot,
                           size_t ulCount) {
-    fprintf(stderr, "testing phase");                            
    /* Sample check on a top-level data structure invariant:
       if the DT is not initialized, its count should be 0. */
    if(!bIsInitialized)
