@@ -53,6 +53,7 @@ boolean CheckerDT_Node_isValid(Node_T oNNode) {
 */
 static boolean CheckerDT_treeCheck(Node_T oNNode) {
    size_t ulIndex;
+   Node_T prevChild = NULL;
 
    if(oNNode!= NULL) {
 
@@ -70,6 +71,16 @@ static boolean CheckerDT_treeCheck(Node_T oNNode) {
          if(iStatus != SUCCESS) {
             fprintf(stderr, "getNumChildren claims more children than getChild returns\n");
             return FALSE;
+
+        /* Check that the children are in increasing lexographic order*/
+        if(prevChild!=NULL){
+            int order = Node_compare(oNChild, prevChild);
+            if(!(order>0)){
+                fprintf(stderr, "children are not inserted in lexicographic order");
+                return FALSE;
+            }
+        }
+            prevChild = oNChild;
          }
 
          /* if recurring down one subtree results in a failed check
@@ -92,6 +103,7 @@ boolean CheckerDT_isValid(boolean bIsInitialized, Node_T oNRoot,
          fprintf(stderr, "Not initialized, but count is not 0\n");
          return FALSE;
       }
+
 
    /* Now checks invariants recursively at each node from the root. */
    return CheckerDT_treeCheck(oNRoot);
