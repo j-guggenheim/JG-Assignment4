@@ -138,6 +138,7 @@ int main(void) {
   free(temp);
   assert(DT_insert("a/x") == SUCCESS);
   assert((temp = DT_toString()) != NULL);
+  fprintf(stderr, "Checkpoint Promotion:\n%s\n", temp);
   assert(!strcmp(temp,"a\na/x\na/y\n"));
   free(temp);
   assert(DT_rm("a/y") == SUCCESS);
