@@ -77,11 +77,11 @@ static boolean CheckerDT_treeCheck(Node_T oNNode, size_t *pNodeCount) {
         /* THIS IS WRONG - should check that the string representation is in order */
         if(prevChild!=NULL){
             int order = Path_comparePath(Node_getPath(prevChild), Node_getPath(oNChild));
-            if(order!<0){
+            if(order>0){
                 fprintf(stderr, "children are not inserted in lexicographic order\n");
                 return FALSE;
             }
-            
+
             if(order == 0){
                 fprintf(stderr, "node has duplicate (non-unique) children\n");
                 return FALSE;
