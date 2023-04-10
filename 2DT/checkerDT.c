@@ -73,7 +73,6 @@ static boolean CheckerDT_treeCheck(Node_T oNNode) {
             return FALSE;
 
         /* Check that the children are in increasing lexographic order*/
-        fprintf(stderr, "testing phase");
         if(prevChild!=NULL){
             fprintf(stderr, "testing phase");
             int order = Node_compare(oNChild, prevChild);
@@ -97,7 +96,7 @@ static boolean CheckerDT_treeCheck(Node_T oNNode) {
 /* see checkerDT.h for specification */
 boolean CheckerDT_isValid(boolean bIsInitialized, Node_T oNRoot,
                           size_t ulCount) {
-
+    fprintf(stderr, "testing phase");                            
    /* Sample check on a top-level data structure invariant:
       if the DT is not initialized, its count should be 0. */
    if(!bIsInitialized)
