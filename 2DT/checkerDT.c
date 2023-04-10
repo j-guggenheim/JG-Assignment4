@@ -114,7 +114,7 @@ boolean CheckerDT_isValid(boolean bIsInitialized, Node_T oNRoot,
    if(!pass) {return FALSE;}
    if(nodeCount!=ulCount) {
     fprintf(stderr, "given size doesn't match the actual node count\n");
-    return FALSE:
+    return FALSE;
    }
    return TRUE;
 }
