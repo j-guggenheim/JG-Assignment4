@@ -74,7 +74,6 @@ static boolean CheckerDT_treeCheck(Node_T oNNode) {
          }
         /* Check that the children are in increasing lexographic order*/
         if(prevChild!=NULL){
-            fprintf(stderr, "testing phase");
             int order = Node_compare(oNChild, prevChild);
             if(!(order>0)){
                 fprintf(stderr, "children are not inserted in lexicographic order");
