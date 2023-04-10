@@ -73,6 +73,7 @@ static boolean CheckerDT_treeCheck(Node_T oNNode) {
             return FALSE;
 
         /* Check that the children are in increasing lexographic order*/
+        fprintf(stderr, "testing phase");
         if(prevChild!=NULL){
             fprintf(stderr, "testing phase");
             int order = Node_compare(oNChild, prevChild);
