@@ -12,8 +12,8 @@
 /* #include "dynarray.h" */
 
 
-/* A dNode_T is a node in a Directory Tree */
-typedef struct d_node *dNode_T;
+/* A Node_T is a node in a Directory Tree */
+typedef struct node *Node_T;
 
 /*
   Creates a new node in the Directory Tree, with path oPPath and
@@ -27,17 +27,17 @@ typedef struct d_node *dNode_T;
                  or oNParent is NULL but oPPath is not of depth 1
   * ALREADY_IN_TREE if oNParent already has a child with this path
 */
-int dNode_new(Path_T oPPath, dNode_T oNParent, dNode_T *poNResult);
+int Node_new(Path_T oPPath, Node_T oNParent, Node_T *poNResult);
 
 /*
   Destroys and frees all memory allocated for the subtree rooted at
   oNNode, i.e., deletes this node and all its descendents. Returns the
   number of nodes deleted.
 */
-size_t dNode_free(dNode_T oNNode);
+size_t Node_free(Node_T oNNode);
 
 /* Returns the path object representing oNNode's absolute path. */
-Path_T dNode_getPath(dNode_T oNNode);
+Path_T Node_getPath(Node_T oNNode);
 
 /*
   Returns TRUE if oNParent has a child with path oPPath. Returns
@@ -48,11 +48,11 @@ Path_T dNode_getPath(dNode_T oNNode);
   such a child, stores in *pulChildID the identifier that such a
   child _would_ have if inserted.
 */
-boolean dNode_hasChild(dNode_T oNParent, Path_T oPPath,
+boolean Node_hasChild(Node_T oNParent, Path_T oPPath,
                          size_t *pulChildID);
 
 /* Returns the number of children that oNParent has. */
-size_t dNode_getNumChildren(dNode_T oNParent);
+size_t Node_getNumChildren(Node_T oNParent);
 
 /*
   Returns an int SUCCESS status and sets *poNResult to be the child
@@ -60,21 +60,21 @@ size_t dNode_getNumChildren(dNode_T oNParent);
   Otherwise, sets *poNResult to NULL and returns status:
   * NO_SUCH_PATH if ulChildID is not a valid child for oNParent
 */
-int dNode_getChild(dNode_T oNParent, size_t ulChildID,
-                  dNode_T *poNResult);
+int Node_getChild(Node_T oNParent, size_t ulChildID,
+                  Node_T *poNResult);
 
 /*
   Returns a the parent node of oNNode.
   Returns NULL if oNNode is the root and thus has no parent.
 */
-dNode_T dNode_getParent(dNode_T oNNode);
+Node_T Node_getParent(Node_T oNNode);
 
 /*
   Compares oNFirst and oNSecond lexicographically based on their paths.
   Returns <0, 0, or >0 if onFirst is "less than", "equal to", or
   "greater than" oNSecond, respectively.
 */
-int dNode_compare(dNode_T oNFirst, dNode_T oNSecond);
+int Node_compare(Node_T oNFirst, Node_T oNSecond);
 
 /*
   Returns a string representation for oNNode, or NULL if
@@ -83,6 +83,6 @@ int dNode_compare(dNode_T oNFirst, dNode_T oNSecond);
   Allocates memory for the returned string, which is then owned by
   the caller!
 */
-char *dNode_toString(dNode_T oNNode);
+char *Node_toString(Node_T oNNode);
 
 #endif
