@@ -233,6 +233,7 @@ size_t Node_free(Node_T oNNode)
     {
         Path_free(oNNode->oPPath);
         free(oNNode);
+        oNNode = NULL;
         ulCount++;
         return ulCount;
     }
@@ -244,6 +245,7 @@ size_t Node_free(Node_T oNNode)
 
     /* finally, free the struct node */
     free(oNNode);
+    oNNode = NULL;
     ulCount++;
     return ulCount;
 }
