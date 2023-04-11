@@ -11,20 +11,21 @@
 #include "dynarray.h"
 #include "ft.h"
 
-struct ft
-{
+struct ft{
 /* a boolean stating whether the FT has been initalized or not. */
 /* This should be FALSE before the FT is initialized. */
-boolean bIsInitialized = FALSE;
+boolean bIsInitialized;
 
 /* a directory node that serves as the root of the FT. */
 /* The root should be null before the FT is initialized. */
-dNode_T oNRoot = NULL;
+dNode_T oNRoot;
 
 /* ulCount keeps track of how many nodes are in the FT. */
 /* The count should be 0 before the FT is initialized. */
-size_t ulCount = 0;
+size_t ulCount;
 };
+
+struct ft FileTree = {FALSE, NULL, 0};
 
 
 /*
@@ -43,8 +44,7 @@ int FT_insertDir(const char *pcPath){
     Path_T oPPath;
     dNode_T oNParent;
     int temp;
-
-    if(bIsInitialized == FALSE) {return INITIALIZATION_ERROR};
+    if(FileTree.bIsInitialized == FALSE) {return INITIALIZATION_ERROR};
     temp = Path_new(pcPath, oPPath);
     if (temp != SUCCESS) {return temp;}
 /* get parent from the FT tree itself, using the path */
@@ -151,8 +151,12 @@ int FT_stat(const char *pcPath, boolean *pbIsFile, size_t *pulSize);
   and SUCCESS otherwise.
 */
 int FT_init(void){
-
+    if(FileTree.bIsInitialized==TRUE) {return INITIALIZATION_ERROR;}
+    FileTree.bIsInitialized=TRUE;
+    return SUCCESS;
 }
+/* i think i'm done */
+
 
 /*
   Removes all contents of the data structure and
@@ -160,7 +164,14 @@ int FT_init(void){
   Returns INITIALIZATION_ERROR if not already initialized,
   and SUCCESS otherwise.
 */
-int FT_destroy(void);
+int FT_destroy(void){
+    dNode_free(FileTree.oNRoot);
+    free(FileTree.oNRoot);
+    free(FileTree.ulCount);
+    free(FileTree);
+}
+/* i think i'm done */
+
 
 /*
   Returns a string representation of the

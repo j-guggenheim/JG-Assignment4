@@ -97,6 +97,8 @@ size_t dNode_free(dNode_T oNNode){
 Path_T dNode_getPath(dNode_T oNNode){
     return oNNode->oPPath;
 }
+/* think i'm done */
+
 
 /*
   Returns TRUE if oNParent has a child with path oPPath. Returns
@@ -120,7 +122,7 @@ boolean dNode_hasChild(dNode_T oNParent, Path_T oPPath,
                             dNode_free(temp);
                             return bool;
                          };
-/* think i'm done */
+/* think i'm done  - needs much improvement */
 
 /* Returns the number of children that oNParent has. */
 size_t dNode_getNumChildren(dNode_T oNParent){
