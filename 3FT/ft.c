@@ -10,6 +10,7 @@
 #include "d_nodeFT.h"
 #include "dynarray.h"
 #include "ft.h"
+#include <stdlib.h>
 
 struct ft{
 /* a boolean stating whether the FT has been initalized or not. */
@@ -44,12 +45,12 @@ int FT_insertDir(const char *pcPath){
     Path_T oPPath;
     dNode_T oNParent;
     int temp;
-    if(FileTree.bIsInitialized == FALSE) {return INITIALIZATION_ERROR};
+    if(FileTree.bIsInitialized == FALSE) {return INITIALIZATION_ERROR;}
     temp = Path_new(pcPath, oPPath);
     if (temp != SUCCESS) {return temp;}
 /* get parent from the FT tree itself, using the path */
 
-    return = dNode_new(oPPath, oNParent, poNResult);
+    return dNode_new(oPPath, oNParent, poNResult);
     /*make sure that dNode_new checks if something is being added into a file (not allowed), instead of into a directory (allowed)*/
 }
 
@@ -165,10 +166,10 @@ int FT_init(void){
   and SUCCESS otherwise.
 */
 int FT_destroy(void){
+    if(FileTree.bIsInitialized == FALSE) {return INITIALIZATION_ERROR;}
     dNode_free(FileTree.oNRoot);
     free(FileTree.oNRoot);
-    free(FileTree.ulCount);
-    free(FileTree);
+    FileTree.bIsInitialized = FALSE;
 }
 /* i think i'm done */
 
