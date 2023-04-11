@@ -17,7 +17,24 @@ information given in the "Policies" web page (also available on armlab
 in the file ~cos217/AuthorizedSourcesList ) to this section of the
 readme file, and edit it as appropriate.
 
+The course's lectures.
 
+The course's precepts.
+
+The course's website.
+
+Documents that are referenced directly by the course's website. 
+Such documents include the course's lecture slides and precept handouts.
+
+The man pages on the armlab cluster.
+
+The course's current staff members outside of class time through office hours.
+
+The course's current staff members outside of class time through meetings.
+
+The course's current staff members outside of class time through Ed.
+
+The course's current staff members outside of class time through e-mail.
 
 ------------------------------------------------------------------------
 Student 2: What authorized sources of information did you use to
@@ -26,7 +43,7 @@ information given in the "Policies" web page (also available on armlab
 in the file ~cos217/AuthorizedSourcesList ) to this section of the
 readme file, and edit it as appropriate.
 
-
+N/A
 
 ------------------------------------------------------------------------
 Student 1: What unauthorized sources of information did you use to
@@ -40,7 +57,7 @@ nature of the interaction, may additionally require the interaction
 being reported to the Committee on Discipline. Write "None" if you used
 no unauthorized sources of information.
 
-"None"
+None.
 
 ------------------------------------------------------------------------
 Student 2: What unauthorized sources of information did you use to
@@ -54,26 +71,42 @@ nature of the interaction, may additionally require the interaction
 being reported to the Committee on Discipline. Write "None" if you used
 no unauthorized sources of information.
 
-
+N/A
 
 ------------------------------------------------------------------------
 Student 1: What is your assessment of the assignment? Was it helpful?
 Was it fun?
 
-
+It was helpful to think about how a professional programmer would develop
+and debug code. It wasn't always clear in Part 3 that we could use and
+modify code from earlier parts. It was hard to get everything done on
+time around Passover, and I am very grateful to Donna for all of her help!
 
 ------------------------------------------------------------------------
 Student 2: What is your assessment of the assignment? Was it helpful?
 Was it fun?
 
-
+N/A
 
 ------------------------------------------------------------------------
 (optional) What information can you provide about your submission that
 will help your grader to grade it in the most favorable light? In
 particular, what bugs are in your submission?
 
+A couple of style comments:
 
+In general, when using booleans I would use if statements such as:
+if(bool == TRUE) rather than if(bool). Since I am getting used to 
+the use of enum for booleans, this visualization is easier for me,
+even if cleaner code might use the latter option.
+
+Additionally, I would sometimes write out more lines of code than
+necessary for the sake of my own clarity. For example, I could have
+put the majority of the code for both FT_insertDir and FT_insertFile 
+in one static function instead of duplicating it, but it was more 
+helpful for me to write it the way I did in case I wanted to make
+changes that obviously altered the way it interacted with files
+or directories. 
 
 ------------------------------------------------------------------------
 What warnings does splint generate for Part 2's checker, and what are
@@ -81,7 +114,7 @@ your disagreements with them? Copy the splint warnings here, and
 express your disagreement after each warning. If there are no
 warnings, then write "None."
 
-
+None.
 
 ------------------------------------------------------------------------
 What warnings does critTer generate on checkerDT.c, and what are your
@@ -89,6 +122,14 @@ disagreements with them? Copy the critTer warnings here, and express
 your disagreement after each warning. If there are no warnings, then
 write "None."
 
+"  checkerDT.c: line 85: low priority: 
+   This area is deeply nested at level 4, consider refactoring
+
+   checkerDT.c: line 91: low priority: 
+   This area is deeply nested at level 4, consider refactoring  "
+
+I think the tree-traversal is clear as it is, and the nesting shows the
+logic of the traversal.
 
 
 ------------------------------------------------------------------------
@@ -97,13 +138,34 @@ your disagreements with them? Copy the splint warnings here, and
 express your disagreement after each warning. If there are no
 warnings, then write "None."
 
-
+None.
+[Other than those originating from instructer-given code.]
 
 ------------------------------------------------------------------------
 What warnings does critTer generate on your Part 3 code, and what are
 your disagreements with them? Copy the critTer warnings here, and
 express your disagreement after each warning. If there are no
 warnings, then write "None."
+
+"  d_nodeFT.c: line 72: medium priority:
+   Do you want to validate 'conts' through an assert?  "
+
+No - a directory will always have contents that are NULL. a file might.
+
+
+"  nodeFT.c: line 377: medium priority:
+   Do you want to validate 'pvNewContents' through an assert?  "
+
+No - a file can potentially have contents that are NULL.
+
+
+"  ft.c: line 362: medium priority:
+   Do you want to validate 'pvContents' through an assert?
+
+   ft.c: line 564: medium priority:
+   Do you want to validate 'pvNewContents' through an assert?"
+
+No - see notes above.
 
 
 
@@ -117,21 +179,59 @@ the error manifests itself or is "noticed" by the client.
 
       Executable         Function with the underlying error
 ===============================================================
-         ./bdtBad1       insert()  /* doesn't yield an initialization error when trying to add a path before the object exists */ 
+         ./bdtBad1       BDT_insert() 
 ---------------------------------------------------------------
-         ./bdtBad2        
+         ./bdtBad2       BDT_rm() 
 ---------------------------------------------------------------
-         ./bdtBad3        
+         ./bdtBad3       BDT_insert()
 ---------------------------------------------------------------
-         ./bdtBad4        
+         ./bdtBad4       BDT_contains()
 ---------------------------------------------------------------
-         ./bdtBad5        
+         ./bdtBad5       BDT_remove()
 ===============================================================
 
 ------------------------------------------------------------------------
 What are your critiques of the given DT implementations, as
 specified in Step 2.5?
 
+
+More comments for instance variables used in functions throughout would
+be helpful. For example, in dtGood.c the function DT_traversePath instantiates:
+int iStatus;
+Path_T oPPrefix = NULL;
+Node_T oNCurr;
+Node_T oNChild = NULL;
+size_t ulDepth;
+size_t i;
+size_t ulChildID; 
+
+Some of these variables might have obvious meanings, but others - for 
+example, oNCurr - do not. Having in-line comments would make the purpose of 
+these variables much more clear, and would give a better understanding 
+to the logic behind the function. 
+
+
+
+Some of the functions in the interface are unnecessary. For example, 
+nodeDT.h doesn't need to have a seperate 'Node_hasChild()' function
+when it already has a 'Node_getChild()' function. Since hasChild stores
+the index where the child is, it seems like it will only be used to get the
+child, and therefore only getChild is needed. Furthermore, if getChild doesn't
+return SUCCESS, then the parent doesn't have the child, and getChild can be
+properly implemented to serve the purpose of both getChild and hasChild.
+
+
+
+The Node and Path modules have too strong coupling. the nodeDTGood.c 
+implementation passes and returns Path_T arguments, and it calls many Path_XYZ
+functions implemented in path.c. For example, Node_new() in nodeDTGood.c calls:
+    - Path_dup
+    - Path_getDepth
+    - Path_getSharedPrefixDepth
+    - Path_free
+It would be better if the Path module did more work related to paths, and the 
+Node module could simply direct the Path module to do that work. This weaker
+coupling would make programs easier to maintain, reuse, and debug.
 
 
 ------------------------------------------------------------------------
