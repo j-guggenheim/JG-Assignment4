@@ -6,10 +6,10 @@
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>
-#include <stddef.h>
 #include "d_nodeFT.h"
 #include "dynarray.h"
 #include "ft.h"
+#include "path.h"
 #include <stdlib.h>
 
 struct ft{
