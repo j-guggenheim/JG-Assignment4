@@ -19,7 +19,7 @@ boolean bIsInitialized;
 
 /* a directory node that serves as the root of the FT. */
 /* The root should be null before the FT is initialized. */
-dNode_T oNRoot;
+Node_T oNRoot;
 
 /* ulCount keeps track of how many nodes are in the FT. */
 /* The count should be 0 before the FT is initialized. */
@@ -41,17 +41,17 @@ struct ft FileTree = {FALSE, NULL, 0};
    * MEMORY_ERROR if memory could not be allocated to complete request
 */
 int FT_insertDir(const char *pcPath){
-    dNode_T *poNResult;
+    Node_T *poNResult;
     Path_T oPPath;
-    dNode_T oNParent;
+    Node_T oNParent;
     int temp;
     if(FileTree.bIsInitialized == FALSE) {return INITIALIZATION_ERROR;}
     temp = Path_new(pcPath, oPPath);
     if (temp != SUCCESS) {return temp;}
 /* get parent from the FT tree itself, using the path */
 
-    return dNode_new(oPPath, oNParent, poNResult);
-    /*make sure that dNode_new checks if something is being added into a file (not allowed), instead of into a directory (allowed)*/
+    return Node_new(oPPath, oNParent, poNResult);
+    /*make sure that Node_new checks if something is being added into a file (not allowed), instead of into a directory (allowed)*/
 }
 
 /*
@@ -183,7 +183,7 @@ int FT_init(void){
 */
 int FT_destroy(void){
     if(FileTree.bIsInitialized == FALSE) {return INITIALIZATION_ERROR;}
-    dNode_free(FileTree.oNRoot);
+    Node_free(FileTree.oNRoot);
     free(FileTree.oNRoot);
     FileTree.bIsInitialized = FALSE;
 }

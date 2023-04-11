@@ -33,8 +33,7 @@ struct node
     size_t lenContents;
 }
 
-int
-Node_new(Path_T oPPath, Node_T oNParent, Node_T *poNResult, boolean dir,
+int Node_new(Path_T oPPath, Node_T oNParent, Node_T *poNResult, boolean dir,
          void *conts, size_t sizeConts)
 {
     struct node *psNew;
