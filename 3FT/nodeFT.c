@@ -192,7 +192,6 @@ int Node_new(Path_T oPPath, Node_T oNParent, Node_T *poNResult, boolean dir,
 
     return SUCCESS;
 }
-/* think i'm done */
 
 /*
   Destroys and frees all memory allocated for the subtree rooted at
@@ -249,7 +248,7 @@ size_t Node_free(Node_T oNNode)
     ulCount++;
     return ulCount;
 }
-/* think i'm done */
+
 
 /* Returns the path object representing oNNode's absolute path. */
 Path_T Node_getPath(Node_T oNNode)
@@ -274,7 +273,7 @@ boolean Node_hasChild(Node_T oNParent, Path_T oPPath,
                             (char *)Path_getPathname(oPPath), pulChildID,
                             (int (*)(const void *, const void *))Node_compareString);
 }
-/* think i'm done  */
+
 
 /* Returns the number of children that oNParent has. */
 size_t Node_getNumChildren(Node_T oNParent)
@@ -286,7 +285,7 @@ size_t Node_getNumChildren(Node_T oNParent)
     }
     return (DynArray_getLength(oNParent->oDChildren));
 }
-/* think i'm done */
+
 
 /*
   Returns an int SUCCESS status and sets *poNResult to be the child
@@ -319,7 +318,7 @@ int Node_getChild(Node_T oNParent, size_t ulChildID,
         return SUCCESS;
     }
 }
-/* think i'm done */
+
 
 /*
   Returns the parent node of oNNode.
@@ -331,7 +330,7 @@ Node_T Node_getParent(Node_T oNNode)
     assert(oNNode != NULL);
     return oNNode->oNParent;
 }
-/* think i'm done */
+
 
 /*
   Compares oNFirst and oNSecond lexicographically based on their paths.

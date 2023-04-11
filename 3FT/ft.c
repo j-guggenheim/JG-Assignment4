@@ -166,17 +166,6 @@ static int FT_findNode(const char *pcPath, Node_T *poNResult)
 }
 /*--------------------------------------------------------------------*/
 
-/*
-   Inserts a new directory into the FT with absolute path pcPath.
-   Returns SUCCESS if the new directory is inserted successfully.
-   Otherwise, returns:
-   * INITIALIZATION_ERROR if the FT is not in an initialized state
-   * BAD_PATH if pcPath does not represent a well-formatted path
-   * CONFLICTING_PATH if the root exists but is not a prefix of pcPath
-   * NOT_A_DIRECTORY if a proper prefix of pcPath exists as a file
-   * ALREADY_IN_TREE if pcPath is already in the FT (as dir or file)
-   * MEMORY_ERROR if memory could not be allocated to complete request
-*/
 int FT_insertDir(const char *pcPath)
 {
     int iStatus;
@@ -284,10 +273,7 @@ int FT_insertDir(const char *pcPath)
     return SUCCESS;
 }
 
-/*
-  Returns TRUE if the FT contains a directory with absolute path
-  pcPath and FALSE if not or if there is an error while checking.
-*/
+
 boolean FT_containsDir(const char *pcPath)
 {
     int iStatus;
@@ -303,17 +289,7 @@ boolean FT_containsDir(const char *pcPath)
     return (boolean)(Node_isDirectory(oNFound));
 }
 
-/*
-  Removes the FT hierarchy (subtree) at the directory with absolute
-  path pcPath. Returns SUCCESS if found and removed.
-  Otherwise, returns:
-  * INITIALIZATION_ERROR if the FT is not in an initialized state
-  * BAD_PATH if pcPath does not represent a well-formatted path
-  * CONFLICTING_PATH if the root exists but is not a prefix of pcPath
-  * NO_SUCH_PATH if absolute path pcPath does not exist in the FT
-  * NOT_A_DIRECTORY if pcPath is in the FT as a file not a directory
-  * MEMORY_ERROR if memory could not be allocated to complete request
-*/
+
 int FT_rmDir(const char *pcPath)
 {
     int iStatus;
@@ -344,19 +320,6 @@ int FT_rmDir(const char *pcPath)
     return SUCCESS;
 }
 
-/*
-   Inserts a new file into the FT with absolute path pcPath, with
-   file contents pvContents of size ulLength bytes.
-   Returns SUCCESS if the new file is inserted successfully.
-   Otherwise, returns:
-   * INITIALIZATION_ERROR if the FT is not in an initialized state
-   * BAD_PATH if pcPath does not represent a well-formatted path
-   * CONFLICTING_PATH if the root exists but is not a prefix of pcPath,
-                      or if the new file would be the FT root
-   * NOT_A_DIRECTORY if a proper prefix of pcPath exists as a file
-   * ALREADY_IN_TREE if pcPath is already in the FT (as dir or file)
-   * MEMORY_ERROR if memory could not be allocated to complete request
-*/
 int FT_insertFile(const char *pcPath, void *pvContents,
                   size_t ulLength)
 {
@@ -480,10 +443,8 @@ int FT_insertFile(const char *pcPath, void *pvContents,
     return SUCCESS;
 }
 
-/*
-  Returns TRUE if the FT contains a file with absolute path
-  pcPath and FALSE if not or if there is an error while checking.
-*/
+
+
 boolean FT_containsFile(const char *pcPath)
 {
     int iStatus;
@@ -499,17 +460,8 @@ boolean FT_containsFile(const char *pcPath)
     return (boolean)(Node_isDirectory(oNFound) == FALSE);
 }
 
-/*
-  Removes the FT file with absolute path pcPath.
-  Returns SUCCESS if found and removed.
-  Otherwise, returns:
-  * INITIALIZATION_ERROR if the FT is not in an initialized state
-  * BAD_PATH if pcPath does not represent a well-formatted path
-  * CONFLICTING_PATH if the root exists but is not a prefix of pcPath
-  * NO_SUCH_PATH if absolute path pcPath does not exist in the FT
-  * NOT_A_FILE if pcPath is in the FT as a directory not a file
-  * MEMORY_ERROR if memory could not be allocated to complete request
-*/
+
+
 int FT_rmFile(const char *pcPath)
 {
     int iStatus;
@@ -530,13 +482,8 @@ int FT_rmFile(const char *pcPath)
     return SUCCESS;
 }
 
-/*
-  Returns the contents of the file with absolute path pcPath.
-  Returns NULL if unable to complete the request for any reason.
 
-  Note: checking for a non-NULL return is not an appropriate
-  contains check, because the contents of a file may be NULL.
-*/
+
 void *FT_getFileContents(const char *pcPath)
 {
     Node_T oNFile = NULL;
@@ -553,12 +500,7 @@ void *FT_getFileContents(const char *pcPath)
     return Node_getContents(oNFile);
 }
 
-/*
-  Replaces current contents of the file with absolute path pcPath with
-  the parameter pvNewContents of size ulNewLength bytes.
-  Returns the old contents if successful. (Note: contents may be NULL.)
-  Returns NULL if unable to complete the request for any reason.
-*/
+
 void *FT_replaceFileContents(const char *pcPath, void *pvNewContents,
                              size_t ulNewLength)
 {
@@ -582,22 +524,8 @@ void *FT_replaceFileContents(const char *pcPath, void *pvNewContents,
     return pvOldContents;
 }
 
-/*
-  Returns SUCCESS if pcPath exists in the hierarchy,
-  Otherwise, returns:
-  * INITIALIZATION_ERROR if the FT is not in an initialized state
-  * BAD_PATH if pcPath does not represent a well-formatted path
-  * CONFLICTING_PATH if the root's path is not a prefix of pcPath
-  * NO_SUCH_PATH if absolute path pcPath does not exist in the FT
-  * MEMORY_ERROR if memory could not be allocated to complete request
 
-  When returning SUCCESS,
-  if path is a directory: sets *pbIsFile to FALSE, *pulSize unchanged
-  if path is a file: sets *pbIsFile to TRUE, and
-                     sets *pulSize to the length of file's contents
 
-  When returning another status, *pbIsFile and *pulSize are unchanged.
-*/
 int FT_stat(const char *pcPath, boolean *pbIsFile, size_t *pulSize)
 {
     Node_T oNNode = NULL;
@@ -625,12 +553,8 @@ int FT_stat(const char *pcPath, boolean *pbIsFile, size_t *pulSize)
     return SUCCESS;
 }
 
-/*
-  Sets the FT data structure to an initialized state.
-  The data structure is initially empty.
-  Returns INITIALIZATION_ERROR if already initialized,
-  and SUCCESS otherwise.
-*/
+
+
 int FT_init(void)
 {
     if (bIsInitialized == TRUE)
@@ -641,12 +565,7 @@ int FT_init(void)
     return SUCCESS;
 }
 
-/*
-  Removes all contents of the data structure and
-  returns it to an uninitialized state.
-  Returns INITIALIZATION_ERROR if not already initialized,
-  and SUCCESS otherwise.
-*/
+
 int FT_destroy(void)
 {
     Node_T oNDestroy = oNRoot;
@@ -656,20 +575,17 @@ int FT_destroy(void)
         return INITIALIZATION_ERROR;
     }
 
-    /* take the root out of the tree */
-    /* FT_rmDir(Path_getPathname(Node_getPath(oNRoot))); */
-
     ulCount -= Node_free(oNDestroy);
     oNRoot = NULL;
-
     bIsInitialized = FALSE;
+
     return SUCCESS;
 }
 
 /* --------------------------------------------------------------------
 
   The following auxiliary functions are used for generating the
-  string representation of the DT.
+  string representation of the FT.
 */
 
 /*
