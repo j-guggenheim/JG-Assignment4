@@ -317,7 +317,7 @@ boolean FT_containsDir(const char *pcPath)
 int FT_rmDir(const char *pcPath)
 {
     int iStatus;
-    Node_T oNRemove;
+    Node_T oNRemove = NULL;
 
     assert(pcPath != NULL);
 
@@ -513,7 +513,7 @@ boolean FT_containsFile(const char *pcPath)
 int FT_rmFile(const char *pcPath)
 {
     int iStatus;
-    Node_T oNRemove;
+    Node_T oNRemove = NULL;
 
     assert(pcPath != NULL);
 
@@ -539,7 +539,7 @@ int FT_rmFile(const char *pcPath)
 */
 void *FT_getFileContents(const char *pcPath)
 {
-    Node_T oNFile;
+    Node_T oNFile = NULL;
     int iStatus;
 
     assert(pcPath != NULL);
@@ -562,7 +562,7 @@ void *FT_getFileContents(const char *pcPath)
 void *FT_replaceFileContents(const char *pcPath, void *pvNewContents,
                              size_t ulNewLength)
 {
-    Node_T oNNode;
+    Node_T oNNode = NULL;
     void *pvOldContents;
     int iStatus;
 
@@ -600,13 +600,13 @@ void *FT_replaceFileContents(const char *pcPath, void *pvNewContents,
 */
 int FT_stat(const char *pcPath, boolean *pbIsFile, size_t *pulSize)
 {
-    Node_T oNNode;
+    Node_T oNNode = NULL;
     int iStatus;
 
     assert(pcPath != NULL);
     assert(pbIsFile != NULL);
     assert(pulSize != NULL);
-    
+
     iStatus = FT_findNode(pcPath, &oNNode);
     if (iStatus != SUCCESS)
     {

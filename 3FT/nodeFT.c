@@ -74,7 +74,7 @@ int Node_new(Path_T oPPath, Node_T oNParent, Node_T *poNResult, boolean dir,
     Path_T oPParentPath = NULL;
     Path_T oPNewPath = NULL;
     size_t ulParentDepth;
-    size_t ulIndex;
+    size_t ulIndex = 0;
     int iStatus;
 
     assert(oPPath != NULL);
@@ -201,7 +201,7 @@ int Node_new(Path_T oPPath, Node_T oNParent, Node_T *poNResult, boolean dir,
 */
 size_t Node_free(Node_T oNNode)
 {
-    size_t ulIndex;
+    size_t ulIndex = 0;
     size_t ulCount = 0;
 
     assert(oNNode != NULL);
@@ -257,7 +257,6 @@ Path_T Node_getPath(Node_T oNNode)
     assert(oNNode != NULL);
     return oNNode->oPPath;
 }
-/* think i'm done */
 
 boolean Node_hasChild(Node_T oNParent, Path_T oPPath,
                       size_t *pulChildID)
