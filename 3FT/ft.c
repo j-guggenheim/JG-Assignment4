@@ -321,7 +321,6 @@ int FT_rmDir(const char *pcPath)
 
     assert(pcPath != NULL);
 
-
     iStatus = FT_findNode(pcPath, &oNRemove);
     if (iStatus != SUCCESS)
     {
@@ -338,8 +337,10 @@ int FT_rmDir(const char *pcPath)
         ulCount -= Node_free(oNRemove);
         oNRoot = NULL;
     }
-    
-    ulCount -= Node_free(oNRemove);
+    else
+    {
+        ulCount -= Node_free(oNRemove);
+    }
     return SUCCESS;
 }
 
@@ -608,10 +609,12 @@ int FT_stat(const char *pcPath, boolean *pbIsFile, size_t *pulSize)
         return iStatus;
     }
 
-    if(Node_isDirectory(oNNode) == TRUE){
+    if (Node_isDirectory(oNNode) == TRUE)
+    {
         pbIsFile = FALSE;
     }
-    else{
+    else
+    {
         pbIsFile = TRUE;
         pulSize = Node_getSizeContents(oNNode);
     }
