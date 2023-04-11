@@ -78,6 +78,7 @@ int Node_new(Path_T oPPath, Node_T oNParent, Node_T *poNResult, boolean dir,
     int iStatus;
 
     assert(oPPath != NULL);
+    assert(poNResult != NULL);
     /* assert(oNParent == NULL || CheckerDT_Node_isValid(oNParent)); */
 
     /* allocate space for a new node */
