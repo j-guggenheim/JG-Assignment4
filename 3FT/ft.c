@@ -650,8 +650,12 @@ int FT_destroy(void)
     {
         return INITIALIZATION_ERROR;
     }
-    Node_free(oNRoot);
+    /* Node_free(oNRoot);
     free(oNRoot);
+    oNRoot = NULL; */
+
+    FT_rmDir(oNRoot);
+
     bIsInitialized = FALSE;
     return SUCCESS;
 }
