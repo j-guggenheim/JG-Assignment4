@@ -207,12 +207,6 @@ size_t Node_free(Node_T oNNode)
     assert(oNNode != NULL);
     /* assert(CheckerDT_Node_isValid(oNNode)); */
 
-    /* if onNode is a file, there are no descendents. */
-    if (Node_isDirectory(oNNode) == FALSE)
-    {
-        free(oNNode);
-        return 1;
-    }
 
     /* remove from parent's list */
     if (oNNode->oNParent != NULL)
@@ -233,6 +227,16 @@ size_t Node_free(Node_T oNNode)
             ulCount += Node_free(DynArray_get(oNNode->oDChildren, 0));
         }
     }
+
+    /* if onNode is a file, there are no descendents. */
+    else
+    {
+        Path_free(oNNode->oPPath);
+        free(oNNode);
+        ulCount++;
+        return ulCount;
+    }
+
     DynArray_free(oNNode->oDChildren);
 
     /* remove path */
