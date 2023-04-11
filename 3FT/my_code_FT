@@ -1,0 +1,44 @@
+boolean FT_containsDir(const char *pcPath)
+{
+    Path_T oPPath;
+    Path_T prefix;
+    int temp;
+    size_t depth;
+    size_t counter;
+    Node_T current;
+    size_t *pulChild;
+
+    if (Path_new(pcPath, oPPath) != SUCCESS)
+    {
+        return FALSE;
+    }
+
+    depth = Path_getDepth(oPPath);
+    current = FileTree.oNRoot;
+
+    for (counter = 0; counter < depth; counter++)
+    {
+        if (Path_prefix(oPPath, counter, prefix) != SUCCESS)
+        {
+            return FALSE;
+        }
+        /* check that the path starts at the root */
+        if (counter == 0)
+        {
+            if (Path_comparePath(prefix, Node_getPath(current))!=0)
+            {
+                return FALSE;
+            }
+        }
+        /* check that each point along the path exists as a node */
+        else if (Node_hasChild(current, prefix, pulChild) != TRUE)
+        {
+            return FALSE;
+        }
+        Node_getChild(current, *pulChild, &current);
+    }
+    if(Node_isDirectory(current) == FALSE){
+        return FALSE;
+    }
+    return TRUE;
+}

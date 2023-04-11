@@ -35,21 +35,21 @@ struct node
     size_t lenContents;
 };
 
-
 /*
   Links new child oNChild into oNParent's children array at index
   ulIndex. Returns SUCCESS if the new child was added successfully,
   or  MEMORY_ERROR if allocation fails adding oNChild to the array.*/
 
 static int Node_addChild(Node_T oNParent, Node_T oNChild,
-                         size_t ulIndex) {
-   assert(oNParent != NULL);
-   assert(oNChild != NULL);
+                         size_t ulIndex)
+{
+    assert(oNParent != NULL);
+    assert(oNChild != NULL);
 
-   if(DynArray_addAt(oNParent->oDChildren, ulIndex, oNChild))
-      return SUCCESS;
-   else
-      return MEMORY_ERROR;
+    if (DynArray_addAt(oNParent->oDChildren, ulIndex, oNChild))
+        return SUCCESS;
+    else
+        return MEMORY_ERROR;
 }
 
 /*
@@ -59,17 +59,16 @@ static int Node_addChild(Node_T oNParent, Node_T oNChild,
   "greater than" pcSecond, respectively.
 */
 static int Node_compareString(const Node_T oNFirst,
-                                 const char *pcSecond) {
-   assert(oNFirst != NULL);
-   assert(pcSecond != NULL);
+                              const char *pcSecond)
+{
+    assert(oNFirst != NULL);
+    assert(pcSecond != NULL);
 
-   return Path_compareString(oNFirst->oPPath, pcSecond);
+    return Path_compareString(oNFirst->oPPath, pcSecond);
 }
 
-
-
 int Node_new(Path_T oPPath, Node_T oNParent, Node_T *poNResult, boolean dir,
-         void *conts, size_t sizeConts)
+             void *conts, size_t sizeConts)
 {
     struct node *psNew;
     Path_T oPParentPath = NULL;
@@ -109,8 +108,8 @@ int Node_new(Path_T oPPath, Node_T oNParent, Node_T *poNResult, boolean dir,
         ulSharedDepth = Path_getSharedPrefixDepth(psNew->oPPath,
                                                   oPParentPath);
         /* parent must be an ancestor of child and cannot be a file */
-        if (ulSharedDepth < ulParentDepth || 
-        oNParent->isDirectory == FALSE)
+        if (ulSharedDepth < ulParentDepth ||
+            oNParent->isDirectory == FALSE)
         {
             Path_free(psNew->oPPath);
             free(psNew);
@@ -342,6 +341,37 @@ int Node_compare(Node_T oNFirst, Node_T oNSecond)
   Allocates memory for the returned string, which is then owned by
   the caller!
 */
+
+boolean Node_isDirectory(Node_T oNNode)
+{
+    assert(oNNode != NULL);
+    return oNNode->isDirectory;
+}
+
+void *Node_getContents(Node_T oNNode)
+{
+    assert(oNNode != NULL);
+    return oNNode->contents;
+}
+
+size_t Node_getSizeContents(Node_T oNNode)
+{
+    assert(oNNode != NULL);
+    return oNNode->lenContents;
+}
+
+int Node_setContents(Node_T oNNode, void *pvNewContents, size_t newLenContents){
+    assert(oNNode != NULL);
+    
+    if(Node_isDirectory(oNNode) == TRUE){
+        return NOT_A_FILE;
+    }
+    oNNode->contents = pvNewContents;
+    oNNode->lenContents = newLenContents;
+    return SUCCESS;
+}
+
+
 char *Node_toString(Node_T oNNode)
 {
     char *copyPath;

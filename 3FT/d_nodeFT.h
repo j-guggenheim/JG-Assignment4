@@ -57,6 +57,19 @@ boolean Node_hasChild(Node_T oNParent, Path_T oPPath,
 /* Returns the number of children that oNParent has. */
 size_t Node_getNumChildren(Node_T oNParent);
 
+/* Returns TRUE if oNNode is a directory, FALSE if it's a file. */
+boolean Node_isDirectory(Node_T oNNode);
+
+/* Returns contents if oNNode is a file, NULL if it's a directory. */
+void* Node_getContents(Node_T oNNode);
+
+/* Returns size of contents if oNNode is a file (0 if it's a directory). */
+size_t Node_getSizeContents(Node_T oNNode);
+
+/* If onNode is a file, updates contents to *pvNewContents and content size
+ to newLenContents and return SUCCESS. Otherwise, return NOT_A_FILE. */
+int Node_setContents(Node_T oNNode, void *pvNewContents, size_t newLenContents);
+
 /*
   Returns an int SUCCESS status and sets *poNResult to be the child
   node of oNParent with identifier ulChildID, if one exists.
