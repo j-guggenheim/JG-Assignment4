@@ -344,7 +344,7 @@ int Node_compare(Node_T oNFirst, Node_T oNSecond)
     assert(oNSecond != NULL);
     return (Path_comparePath(oNFirst->oPPath, oNSecond->oPPath));
 }
-/* think i'm done */
+
 
 /*
   Returns a string representation for oNNode, or NULL if

@@ -331,7 +331,7 @@ int FT_rmDir(const char *pcPath)
         return NOT_A_DIRECTORY;
     }
 
-    /* try this out */
+    /* if removing the root, set the root pointer to NULL */
     if (oNRemove == oNRoot)
     {
         ulCount -= Node_free(oNRemove);
@@ -649,18 +649,22 @@ int FT_init(void)
 */
 int FT_destroy(void)
 {
+    Node_T oNDestroy = oNRoot;
+
     if (bIsInitialized == FALSE)
     {
         return INITIALIZATION_ERROR;
     }
 
     /* take the root out of the tree */
-    FT_rmDir(Path_getPathname(Node_getPath(oNRoot)));
+    /* FT_rmDir(Path_getPathname(Node_getPath(oNRoot))); */
+
+    ulCount -= Node_free(oNDestroy);
+    oNRoot = NULL;
 
     bIsInitialized = FALSE;
     return SUCCESS;
 }
-/* i think i'm done */
 
 /* --------------------------------------------------------------------
 
