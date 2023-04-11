@@ -9,7 +9,7 @@ clean:
 ft: ft_client.o ft.o dynarray.o path.o d_nodeFT.o
 	gcc217 -g ft_client.o ft.o dynarray.o path.o d_nodeFT.o -o ft
 ft_client.o: ft_client.c ft.h a4def.h 
-	gcc217 -c - gft_client.c
+	gcc217 -c -g ft_client.c
 ft.o: ft.c ft.h d_nodeFT.h dynarray.h path.h a4def.h
 	gcc217 -c -g ft.c
 dynarray.o: dynarray.c dynarray.h
