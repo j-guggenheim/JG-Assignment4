@@ -211,7 +211,7 @@ size_t Node_free(Node_T oNNode)
     if (Node_isDirectory(oNNode) == FALSE)
     {
         free(oNNode);
-        return 0;
+        return 1;
     }
 
     /* remove from parent's list */
