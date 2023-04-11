@@ -310,20 +310,20 @@ boolean FT_containsDir(const char *pcPath)
 int FT_rmDir(const char *pcPath)
 {
     int iStatus;
-    Node_T *oNRemove;
+    Node_T oNRemove;
 
     assert(pcPath != NULL);
 
-    iStatus = FT_findNode(pcPath, oNRemove);
+    iStatus = FT_findNode(pcPath, &oNRemove);
     if (iStatus != SUCCESS)
     {
         return iStatus;
     }
-    if (Node_isDirectory(*oNRemove) != TRUE)
+    if (Node_isDirectory(oNRemove) != TRUE)
     {
         return NOT_A_DIRECTORY;
     }
-    ulCount -= Node_free(*oNRemove);
+    ulCount -= Node_free(oNRemove);
     return SUCCESS;
 }
 
@@ -481,20 +481,20 @@ boolean FT_containsFile(const char *pcPath)
 int FT_rmFile(const char *pcPath)
 {
     int iStatus;
-    Node_T *oNRemove;
+    Node_T oNRemove;
 
     assert(pcPath != NULL);
 
-    iStatus = FT_findNode(pcPath, oNRemove);
+    iStatus = FT_findNode(pcPath, &oNRemove);
     if (iStatus != SUCCESS)
     {
         return iStatus;
     }
-    if (Node_isDirectory(*oNRemove) != FALSE)
+    if (Node_isDirectory(oNRemove) != FALSE)
     {
         return NOT_A_FILE;
     }
-    ulCount -= Node_free(*oNRemove);
+    ulCount -= Node_free(oNRemove);
     return SUCCESS;
 }
 
@@ -507,18 +507,18 @@ int FT_rmFile(const char *pcPath)
 */
 void *FT_getFileContents(const char *pcPath)
 {
-    Node_T *oNFile;
+    Node_T oNFile;
     int iStatus;
 
     assert(pcPath != NULL);
 
-    iStatus = FT_findNode(pcPath, oNFile);
+    iStatus = FT_findNode(pcPath, &oNFile);
     if (iStatus != SUCCESS)
     {
         return NULL;
     }
 
-    return Node_getContents(*oNFile);
+    return Node_getContents(oNFile);
 }
 
 /*
@@ -530,23 +530,23 @@ void *FT_getFileContents(const char *pcPath)
 void *FT_replaceFileContents(const char *pcPath, void *pvNewContents,
                              size_t ulNewLength)
 {
-    Node_T *oNNode;
+    Node_T oNNode;
     void *pvOldContents;
     int iStatus;
 
     assert(pcPath != NULL);
 
-    iStatus = FT_findNode(pcPath, oNNode);
+    iStatus = FT_findNode(pcPath, &oNNode);
     if (iStatus != SUCCESS)
     {
         return NULL;
     }
-    if (Node_isDirectory(*oNNode) == TRUE)
+    if (Node_isDirectory(oNNode) == TRUE)
     {
         return NULL;
     }
-    pvOldContents = Node_getContents(*oNNode);
-    Node_setContents(*oNNode, pvNewContents, ulNewLength);
+    pvOldContents = Node_getContents(oNNode);
+    Node_setContents(oNNode, pvNewContents, ulNewLength);
     return pvOldContents;
 }
 
@@ -603,6 +603,7 @@ int FT_destroy(void)
     Node_free(oNRoot);
     free(oNRoot);
     bIsInitialized = FALSE;
+    return SUCCESS;
 }
 /* i think i'm done */
 
@@ -647,7 +648,7 @@ static size_t FT_preOrderTraversal(Node_T n, DynArray_T d, size_t i)
             iStatus = Node_getChild(n, c, &oNChild);
             assert(iStatus == SUCCESS);
             if (Node_isDirectory(oNChild) == TRUE){
-                i = DT_preOrderTraversal(oNChild, d, i);
+                i = FT_preOrderTraversal(oNChild, d, i);
             }
         }
     }
