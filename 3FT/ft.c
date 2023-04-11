@@ -321,6 +321,7 @@ int FT_rmDir(const char *pcPath)
 
     assert(pcPath != NULL);
 
+
     iStatus = FT_findNode(pcPath, &oNRemove);
     if (iStatus != SUCCESS)
     {
