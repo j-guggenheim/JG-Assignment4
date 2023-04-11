@@ -1,5 +1,5 @@
 /*--------------------------------------------------------------------*/
-/* d_nodeDT.h                                                         */
+/* nodeDT.h                                                           */
 /* Author: Judah Guggenheim, code borrowed from Christopher Moretti   */
 /*--------------------------------------------------------------------*/
 
@@ -9,7 +9,7 @@ to be one node that does both directories and files. */
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
-#include "d_nodeFT.h"
+#include "nodeFT.h"
 #include "dynarray.h"
 
 /* A node representing a directory in a File Tree */
@@ -79,7 +79,6 @@ int Node_new(Path_T oPPath, Node_T oNParent, Node_T *poNResult, boolean dir,
 
     assert(oPPath != NULL);
     assert(poNResult != NULL);
-    /* assert(oNParent == NULL || CheckerDT_Node_isValid(oNParent)); */
 
     /* allocate space for a new node */
     psNew = malloc(sizeof(struct node));

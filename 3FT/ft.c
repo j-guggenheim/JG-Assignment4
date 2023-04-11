@@ -6,7 +6,7 @@
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>
-#include "d_nodeFT.h"
+#include "nodeFT.h"
 #include "dynarray.h"
 #include "ft.h"
 #include "path.h"
