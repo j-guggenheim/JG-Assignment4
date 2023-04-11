@@ -58,7 +58,7 @@ int main(void) {
   assert(BDT_insert("1root/2child/3grandchild") == SUCCESS);
   fprintf(stderr, "Checkpoint Promotion:\n%s\n", BDT_toString());
   assert(BDT_contains("1root") == TRUE);
-  /*assert(BDT_contains("1root/2child") == TRUE);*/
+  assert(BDT_contains("1root/2child") == TRUE);
   assert(BDT_contains("1root/2child/3grandchild") == TRUE);
   assert(BDT_contains("anotherRoot") == FALSE);
   assert(BDT_insert("anotherRoot") == CONFLICTING_PATH);
@@ -141,7 +141,6 @@ int main(void) {
   free(temp);
   assert(BDT_rm("a/y") == SUCCESS);
   assert((temp = BDT_toString()) != NULL);
-  fprintf(stderr, "Checkpoint Promotion:\n%s\n", temp);
   assert(!strcmp(temp,"a\na/x\n"));
   free(temp);
   assert(BDT_insert("a/y2") == SUCCESS);
