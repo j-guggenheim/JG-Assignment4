@@ -39,8 +39,8 @@ struct node
 /*
   Links new child oNChild into oNParent's children array at index
   ulIndex. Returns SUCCESS if the new child was added successfully,
-  or  MEMORY_ERROR if allocation fails adding oNChild to the array.
-*/
+  or  MEMORY_ERROR if allocation fails adding oNChild to the array.*/
+  
 static int Node_addChild(Node_T oNParent, Node_T oNChild,
                          size_t ulIndex) {
    assert(oNParent != NULL);
