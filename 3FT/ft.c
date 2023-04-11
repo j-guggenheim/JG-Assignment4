@@ -611,12 +611,12 @@ int FT_stat(const char *pcPath, boolean *pbIsFile, size_t *pulSize)
 
     if (Node_isDirectory(oNNode) == TRUE)
     {
-        pbIsFile = FALSE;
+        *pbIsFile = FALSE;
     }
     else
     {
-        pbIsFile = TRUE;
-        pulSize = Node_getSizeContents(oNNode);
+        *pbIsFile = TRUE;
+        *pulSize = Node_getSizeContents(oNNode);
     }
     return SUCCESS;
 }
