@@ -378,6 +378,14 @@ int FT_insertFile(const char *pcPath, void *pvContents,
     }
 
     ulDepth = Path_getDepth(oPPath);
+
+    /* putting a file at the root is illegal. */
+    if (ulDepth == 1)
+    {
+        Path_free(oPPath);
+        return CONFLICTING_PATH;
+    }
+
     if (oNCurr == NULL) /* new root! */
         ulIndex = 1;
     else
@@ -647,7 +655,8 @@ static size_t FT_preOrderTraversal(Node_T n, DynArray_T d, size_t i)
             Node_T oNChild = NULL;
             iStatus = Node_getChild(n, c, &oNChild);
             assert(iStatus == SUCCESS);
-            if (Node_isDirectory(oNChild) == TRUE){
+            if (Node_isDirectory(oNChild) == TRUE)
+            {
                 i = FT_preOrderTraversal(oNChild, d, i);
             }
         }
