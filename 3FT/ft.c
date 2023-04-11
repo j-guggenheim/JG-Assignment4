@@ -590,7 +590,23 @@ void *FT_replaceFileContents(const char *pcPath, void *pvNewContents,
 */
 int FT_stat(const char *pcPath, boolean *pbIsFile, size_t *pulSize)
 {
-    return NULL;
+    Node_T oNNode;
+    int iStatus;
+
+    iStatus = FT_findNode(pcPath, &oNNode);
+    if (iStatus != SUCCESS)
+    {
+        return iStatus;
+    }
+
+    if(Node_isDirectory(oNNode) == TRUE){
+        pbIsFile = FALSE;
+    }
+    else{
+        pbIsFile = TRUE;
+        pulSize = Node_getSizeContents(oNNode);
+    }
+    return SUCCESS;
 }
 
 /*

@@ -207,6 +207,12 @@ size_t Node_free(Node_T oNNode)
     assert(oNNode != NULL);
     /* assert(CheckerDT_Node_isValid(oNNode)); */
 
+    /* if onNode is a file, there are no descendents. */
+    if (Node_isDirectory(oNNode) == FALSE)
+    {
+        free(oNNode);
+    }
+
     /* remove from parent's list */
     if (oNNode->oNParent != NULL)
     {
@@ -360,17 +366,18 @@ size_t Node_getSizeContents(Node_T oNNode)
     return oNNode->lenContents;
 }
 
-int Node_setContents(Node_T oNNode, void *pvNewContents, size_t newLenContents){
+int Node_setContents(Node_T oNNode, void *pvNewContents, size_t newLenContents)
+{
     assert(oNNode != NULL);
-    
-    if(Node_isDirectory(oNNode) == TRUE){
+
+    if (Node_isDirectory(oNNode) == TRUE)
+    {
         return NOT_A_FILE;
     }
     oNNode->contents = pvNewContents;
     oNNode->lenContents = newLenContents;
     return SUCCESS;
 }
-
 
 char *Node_toString(Node_T oNNode)
 {
