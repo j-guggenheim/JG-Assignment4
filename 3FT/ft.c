@@ -153,13 +153,6 @@ static int FT_findNode(const char *pcPath, Node_T *poNResult)
         return NO_SUCH_PATH;
     }
 
-    if (Node_isDirectory(oNFound) == FALSE)
-    {
-        Path_free(oPPath);
-        *poNResult = NULL;
-        return NOT_A_DIRECTORY;
-    }
-
     if (Path_comparePath(Node_getPath(oNFound), oPPath) != 0)
     {
         Path_free(oPPath);
@@ -210,6 +203,13 @@ int FT_insertDir(const char *pcPath)
     {
         Path_free(oPPath);
         return iStatus;
+    }
+
+    /* adding a child to a file is illegal */
+    if (Node_isDirectory(oNCurr) == FALSE)
+    {
+        Path_free(oPPath);
+        return NOT_A_DIRECTORY;
     }
 
     /* no ancestor node found, so if root is not NULL,
