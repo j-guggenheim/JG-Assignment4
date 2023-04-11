@@ -603,6 +603,10 @@ int FT_stat(const char *pcPath, boolean *pbIsFile, size_t *pulSize)
     Node_T oNNode;
     int iStatus;
 
+    assert(pcPath != NULL);
+    assert(pbIsFile != NULL);
+    assert(pulSize != NULL);
+    
     iStatus = FT_findNode(pcPath, &oNNode);
     if (iStatus != SUCCESS)
     {
