@@ -50,7 +50,7 @@ int FT_insertDir(const char *pcPath){
     if (temp != SUCCESS) {return temp;}
 /* get parent from the FT tree itself, using the path */
 
-    return Node_new(oPPath, oNParent, poNResult);
+    return Node_new(oPPath, oNParent, poNResult, FALSE, NULL, 0);
     /*make sure that Node_new checks if something is being added into a file (not allowed), instead of into a directory (allowed)*/
 }
 

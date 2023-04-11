@@ -16,7 +16,10 @@ typedef struct node *Node_T;
 
 /*
   Creates a new node in the Directory Tree, with path oPPath and
-  parent oNParent. Returns an int SUCCESS status and sets *poNResult
+  parent oNParent. If the node is a file, dir is FALSE and conts and 
+  sizeConts represent the contents of that file and their size. If the
+  node is a directory, dir is TRUE, conts is NULL, and sizeConts is 0.
+  Returns an int SUCCESS status and sets *poNResult
   to be the new node if successful. Otherwise, sets *poNResult to NULL
   and returns status:
   * MEMORY_ERROR if memory could not be allocated to complete request
