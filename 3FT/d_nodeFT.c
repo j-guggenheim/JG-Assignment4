@@ -6,7 +6,9 @@
 /* NOTE: This was originally set up to be the node implementation only
 for nodes represanting directories. I (think I) am in the process of changing that now
 to be one node that does both directories and files. */
+#include <stdlib.h>
 #include <assert.h>
+#include <string.h>
 #include "d_nodeFT.h"
 #include "dynarray.h"
 
