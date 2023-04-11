@@ -58,7 +58,9 @@ int FT_insertDir(const char *pcPath){
   Returns TRUE if the FT contains a directory with absolute path
   pcPath and FALSE if not or if there is an error while checking.
 */
-boolean FT_containsDir(const char *pcPath);
+boolean FT_containsDir(const char *pcPath){
+    return NULL;
+}
 
 /*
   Removes the FT hierarchy (subtree) at the directory with absolute
@@ -71,7 +73,9 @@ boolean FT_containsDir(const char *pcPath);
   * NOT_A_DIRECTORY if pcPath is in the FT as a file not a directory
   * MEMORY_ERROR if memory could not be allocated to complete request
 */
-int FT_rmDir(const char *pcPath);
+int FT_rmDir(const char *pcPath){
+    return NULL;
+}
 
 
 /*
@@ -88,13 +92,17 @@ int FT_rmDir(const char *pcPath);
    * MEMORY_ERROR if memory could not be allocated to complete request
 */
 int FT_insertFile(const char *pcPath, void *pvContents,
-                  size_t ulLength);
+                  size_t ulLength){
+                    return NULL;
+                  }
 
 /*
   Returns TRUE if the FT contains a file with absolute path
   pcPath and FALSE if not or if there is an error while checking.
 */
-boolean FT_containsFile(const char *pcPath);
+boolean FT_containsFile(const char *pcPath){
+    return NULL;
+}
 
 /*
   Removes the FT file with absolute path pcPath.
@@ -107,7 +115,9 @@ boolean FT_containsFile(const char *pcPath);
   * NOT_A_FILE if pcPath is in the FT as a directory not a file
   * MEMORY_ERROR if memory could not be allocated to complete request
 */
-int FT_rmFile(const char *pcPath);
+int FT_rmFile(const char *pcPath){
+    return NULL;
+}
 
 /*
   Returns the contents of the file with absolute path pcPath.
@@ -116,7 +126,9 @@ int FT_rmFile(const char *pcPath);
   Note: checking for a non-NULL return is not an appropriate
   contains check, because the contents of a file may be NULL.
 */
-void *FT_getFileContents(const char *pcPath);
+void *FT_getFileContents(const char *pcPath){
+    return NULL;
+}
 
 /*
   Replaces current contents of the file with absolute path pcPath with
@@ -125,7 +137,9 @@ void *FT_getFileContents(const char *pcPath);
   Returns NULL if unable to complete the request for any reason.
 */
 void *FT_replaceFileContents(const char *pcPath, void *pvNewContents,
-                             size_t ulNewLength);
+                             size_t ulNewLength){
+                                return NULL;
+                             }
 
 /*
   Returns SUCCESS if pcPath exists in the hierarchy,
@@ -143,7 +157,9 @@ void *FT_replaceFileContents(const char *pcPath, void *pvNewContents,
 
   When returning another status, *pbIsFile and *pulSize are unchanged.
 */
-int FT_stat(const char *pcPath, boolean *pbIsFile, size_t *pulSize);
+int FT_stat(const char *pcPath, boolean *pbIsFile, size_t *pulSize){
+    return NULL;
+}
 
 /*
   Sets the FT data structure to an initialized state.
@@ -186,4 +202,6 @@ int FT_destroy(void){
   Allocates memory for the returned string,
   which is then owned by client!
 */
-char *FT_toString(void);
+char *FT_toString(void){
+    return NULL;
+}

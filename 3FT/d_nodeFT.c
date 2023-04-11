@@ -121,7 +121,7 @@ boolean dNode_hasChild(dNode_T oNParent, Path_T oPPath,
                             else {bool = TRUE;}
                             dNode_free(temp);
                             return bool;
-                         };
+                         }
 /* think i'm done  - needs much improvement */
 
 /* Returns the number of children that oNParent has. */
@@ -175,4 +175,6 @@ int dNode_compare(dNode_T oNFirst, dNode_T oNSecond){
   Allocates memory for the returned string, which is then owned by
   the caller!
 */
-char *dNode_toString(dNode_T oNNode);
+char *dNode_toString(dNode_T oNNode){
+    
+}
