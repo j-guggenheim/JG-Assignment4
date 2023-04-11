@@ -206,7 +206,7 @@ int FT_insertDir(const char *pcPath)
     }
 
     /* adding a child to a file is illegal */
-    if (Node_isDirectory(oNCurr) == FALSE)
+    if (oNCurr != NULL && Node_isDirectory(oNCurr) == FALSE)
     {
         Path_free(oPPath);
         return NOT_A_DIRECTORY;
@@ -374,6 +374,13 @@ int FT_insertFile(const char *pcPath, void *pvContents,
     {
         Path_free(oPPath);
         return iStatus;
+    }
+
+    /* adding a child to a file is illegal */
+    if (oNCurr != NULL && Node_isDirectory(oNCurr) == FALSE)
+    {
+        Path_free(oPPath);
+        return NOT_A_DIRECTORY;
     }
 
     /* no ancestor node found, so if root is not NULL,
