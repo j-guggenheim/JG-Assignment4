@@ -654,7 +654,7 @@ int FT_destroy(void)
     free(oNRoot);
     oNRoot = NULL; */
 
-    FT_rmDir(oNRoot);
+    FT_rmDir(Path_getPathname(Node_getPath(oNRoot)));
 
     bIsInitialized = FALSE;
     return SUCCESS;
