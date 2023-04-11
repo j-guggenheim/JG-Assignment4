@@ -11,7 +11,6 @@
 #include "path.h"
 /* #include "dynarray.h" */
 
-
 /* A Node_T is a node in a Directory Tree */
 typedef struct node *Node_T;
 
@@ -27,7 +26,8 @@ typedef struct node *Node_T;
                  or oNParent is NULL but oPPath is not of depth 1
   * ALREADY_IN_TREE if oNParent already has a child with this path
 */
-int Node_new(Path_T oPPath, Node_T oNParent, Node_T *poNResult);
+int Node_new(Path_T oPPath, Node_T oNParent, Node_T *poNResult, boolean dir,
+             void *conts, size_t sizeConts);
 
 /*
   Destroys and frees all memory allocated for the subtree rooted at
@@ -49,7 +49,7 @@ Path_T Node_getPath(Node_T oNNode);
   child _would_ have if inserted.
 */
 boolean Node_hasChild(Node_T oNParent, Path_T oPPath,
-                         size_t *pulChildID);
+                      size_t *pulChildID);
 
 /* Returns the number of children that oNParent has. */
 size_t Node_getNumChildren(Node_T oNParent);
