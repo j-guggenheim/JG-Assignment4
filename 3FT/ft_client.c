@@ -159,7 +159,7 @@ int main(void) {
   /* removing the root doesn't uninitialize the structure */
   assert(FT_rmDir("1anotherroot") == CONFLICTING_PATH);
   assert(FT_rmDir("1root") == SUCCESS);
-  /* assert(FT_rmDir("1root") == NO_SUCH_PATH); */
+  assert(FT_rmDir("1root") == NO_SUCH_PATH);
   assert(FT_containsDir("1root/2child") == FALSE);
   assert(FT_containsDir("1root") == FALSE);
   assert(FT_rmDir("1root") == NO_SUCH_PATH);

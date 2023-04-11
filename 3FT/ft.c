@@ -327,10 +327,18 @@ int FT_rmDir(const char *pcPath)
     {
         return iStatus;
     }
-    if (Node_isDirectory(oNRemove) != TRUE)
+    if (Node_isDirectory(oNRemove) == FALSE)
     {
         return NOT_A_DIRECTORY;
     }
+
+    /* try this out */
+    if (oNRemove == oNRoot)
+    {
+        ulCount -= Node_free(oNRemove);
+        oNRoot = NULL;
+    }
+    
     ulCount -= Node_free(oNRemove);
     return SUCCESS;
 }
