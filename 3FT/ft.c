@@ -59,7 +59,7 @@ int FT_insertDir(const char *pcPath){
   pcPath and FALSE if not or if there is an error while checking.
 */
 boolean FT_containsDir(const char *pcPath){
-    return NULL;
+    return FALSE;
 }
 
 /*
@@ -101,7 +101,7 @@ int FT_insertFile(const char *pcPath, void *pvContents,
   pcPath and FALSE if not or if there is an error while checking.
 */
 boolean FT_containsFile(const char *pcPath){
-    return NULL;
+    return FALSE;
 }
 
 /*
