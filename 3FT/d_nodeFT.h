@@ -66,7 +66,7 @@ void* Node_getContents(Node_T oNNode);
 /* Returns size of contents if oNNode is a file (0 if it's a directory). */
 size_t Node_getSizeContents(Node_T oNNode);
 
-/* If onNode is a file, updates contents to *pvNewContents and content size
+/* If oNNode is a file, updates contents to *pvNewContents and content size
  to newLenContents and return SUCCESS. Otherwise, return NOT_A_FILE. */
 int Node_setContents(Node_T oNNode, void *pvNewContents, size_t newLenContents);
 

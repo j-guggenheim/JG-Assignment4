@@ -636,7 +636,6 @@ int FT_init(void)
     bIsInitialized = TRUE;
     return SUCCESS;
 }
-/* i think i'm done */
 
 /*
   Removes all contents of the data structure and
@@ -650,10 +649,8 @@ int FT_destroy(void)
     {
         return INITIALIZATION_ERROR;
     }
-    /* Node_free(oNRoot);
-    free(oNRoot);
-    oNRoot = NULL; */
 
+    /* take the root out of the tree */
     FT_rmDir(Path_getPathname(Node_getPath(oNRoot)));
 
     bIsInitialized = FALSE;
