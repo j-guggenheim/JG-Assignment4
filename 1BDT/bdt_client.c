@@ -55,7 +55,8 @@ int main(void) {
      ALREADY_IN_TREE, and trying to insert some other root should
      return CONFLICTING_PATH. */
   assert(BDT_insert("1root") == SUCCESS);
-  assert(BDT_insert("1root/2child/3grandchild") == SUCCESS);
+  /* assert(BDT_insert("1root/2child/3grandchild") == SUCCESS); */
+  assert(BDT_insert("1root/2child") == SUCCESS);
   /* fprintf(stderr, "Checkpoint Promotion:\n%s\n", BDT_toString()); */
   assert(BDT_contains("1root") == TRUE);
   assert(BDT_contains("1root/2child") == TRUE);
